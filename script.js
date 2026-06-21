@@ -21,40 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
     const creator = creators[(video.id - 1) % creators.length];
 
-    const titles = [
-      "JavaScript Masterclass: Advanced Event Loop & Closures",
-      "React 19 Crash Course: Transitions, Actions & Server Components",
-      "CSS Animation Tricks: Build High-Performance Micro-interactions",
-      "Journey to the Orion Nebula: Space Visualized in 8K Resolution",
-      "Iceland Drone Odyssey: Discovering Volcanic Landscapes & Black Sands",
-      "UI/UX Design Systems: Designing Component Libraries for Scalable SaaS",
-      "Quantum Physics Demystified: Entanglement & Superposition Basics",
-      "Alpine Wilderness Tour: Solo Hiking through Swiss Mountain Valleys",
-      "TypeScript Advanced Types: Conditional Types, Infer & Mapped Types",
-      "Figma Auto-Layout Masterclass: Build Responsive Dashboards Instantly",
-      "The James Webb Telescope: Secrets of the First Cosmic Deep Fields",
-      "Kyoto Sanctuary: A Cinematic Walk Under Golden Autumn Canopies",
-      "Docker Containers: Complete Guide from Sandbox to Production Kubernetes",
-      "Svelte 5 Runes: Reactivity Re-imagined in Modern Web Apps",
-      "Node.js Multithreading: Worker Threads & Clustering Architectures",
-      "Designing for Web 3: Principles of Spatial & Glassmorphic UI Renders",
-      "Logo Redesign Case Study: Rebranding a Tech Unicorn from Scratch",
-      "Typography Masterclass: Kerning, Tracking & Hierarchy Rules",
-      "Dark Matter Chronicles: Searching for the Invisible Pillars of the Universe",
-      "Black Hole Event Horizons: Spacetime Singularities Simply Explained",
-      "Mars Colonization Systems: Engineering Life Support in Red Deserts",
-      "Patagonia Wilderness: Backpacking Across Glaciers and Towers",
-      "Tokyo After Dark: Exploring Hidden Cyberpunk Neon Alleyways",
-      "Amalfi Coast Guide: Navigating Italy's Iconic Cliffside Towns",
-      "Rust System Programming: Write Safe, Zero-Cost Code",
-      "Next.js 15 App Router: Server actions & Dynamic Rendering",
-      "Color Theory in Web Design: Creating Premium Visual Harmony",
-      "3D Blender Renders: Creating Soft Cinematic Glass Textures",
-      "Deep Space Nebula Mapping: Infrared Astrophotography deep-dive",
-      "Lofoten Islands Winter: Exploring Snowy Fjords & Frozen Lakes"
-    ];
-    const title = titles[(video.id - 1) % titles.length] || `Premium Video Episode ${video.id}`;
-
     const descriptions = [
       "Learn advanced JavaScript concepts including event loops, closures, tasks execution processes, and dynamic environment lifecycles.",
       "Master the next era of React web design. We will build practical exercises including Server Components, form actions, and async hooks.",
@@ -99,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     return {
       ...video,
-      title,
+      title: video.title,
       category,
       creator,
       description,
@@ -110,46 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   });
   
-  // Create 120-item database for index pagination by replicating the 30 base items
-  const expandedDatabase = [];
-  for (let i = 0; i < 10; i++) {
-    database.forEach((video, idx) => {
-      const pageId = (i * database.length) + idx + 1;
-      const multiplier = (i + 1);
-      const views = Math.floor(video.views * (0.5 + (multiplier * 0.15)));
-      const likes = Math.min(100, Math.max(90, video.likes - (idx % 3)));
-      const rating = parseFloat(Math.min(5.0, Math.max(4.0, video.rating - (idx * 0.01) + (i * 0.005))).toFixed(1));
-      
-      let title = video.title;
-      let date = video.uploadDate;
-      if (i > 0) {
-        title = title.replace('Masterclass', `Part II (Ep. ${multiplier})`)
-                     .replace('Crash Course', `Advanced Guide ${multiplier}`)
-                     .replace('Tricks', `Pro Tips v${multiplier}`)
-                     .replace('Journey', `Voyage v${multiplier}`)
-                     .replace('Odyssey', `Expedition ${multiplier}`)
-                     .replace('Systems', `Architecture v${multiplier}`)
-                     .replace('Demystified', `Unveiled Vol. ${multiplier}`)
-                     .replace('Tour', `Guide Vol. ${multiplier}`)
-                     .replace('Advanced Types', `Generic Patterns v${multiplier}`)
-                     .replace('Auto-Layout', `Pro Component Design`)
-                     .replace('Telescope', `Findings (Update ${multiplier})`)
-                     .replace('Sanctuary', `Sanctuary Episode ${multiplier}`);
-        date = `${multiplier} months ago`;
-      }
-
-      expandedDatabase.push({
-        ...video,
-        id: pageId,
-        title,
-        views,
-        likes,
-        rating,
-        date
-      });
-    });
-  }
-
   // ==========================================================================
   // 1. Shared Layout Controls (Header Scrolling, Themes, Back-to-Top)
   // ==========================================================================
@@ -237,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================================================
   const videoGrid = document.getElementById('videoGrid');
   if (videoGrid) {
-    let filteredVideos = [...expandedDatabase];
+    let filteredVideos = [...database];
     let currentPage = 1;
     const itemsPerPage = 12;
     let activeCategory = 'all';
@@ -294,7 +220,6 @@ document.addEventListener('DOMContentLoaded', () => {
       noResultsState.classList.add('hidden');
 
       videos.forEach((video) => {
-        const isTrending = video.views > 200000;
         const card = document.createElement('article');
         card.className = 'video-card';
         card.setAttribute('data-id', video.id);
@@ -304,11 +229,12 @@ document.addEventListener('DOMContentLoaded', () => {
         card.innerHTML = `
           <div class="card-thumbnail-wrapper">
             <img src="${video.thumbnail}" alt="Video ${video.id}" class="card-thumbnail" loading="lazy">
-            ${isTrending ? `<span class="trending-badge"><i class="fa-solid fa-fire"></i> Trending</span>` : ''}
             <span class="video-views views-count-el" data-views="${video.views}">
               <i class="fa-solid fa-eye"></i> Calculating views...
             </span>
-            <span class="video-duration">${video.duration}</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">${video.title}</h3>
           </div>
         `;
 
@@ -354,10 +280,10 @@ document.addEventListener('DOMContentLoaded', () => {
           subheading.textContent = `Found ${filteredVideos.length} videos matching "${activeSearchQuery}"`;
         } else if (activeCategory !== 'all') {
           heading.textContent = `${activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1)} Highlights`;
-          subheading.textContent = `A curated list of ${filteredVideos.length} ${activeCategory} masterclasses`;
+          subheading.textContent = `A curated list of ${filteredVideos.length} ${activeCategory} videos`;
         } else {
           heading.textContent = `Curated Playlist`;
-          subheading.textContent = `Showing 12 premium handpicked videos`;
+          subheading.textContent = `Showing ${filteredVideos.length} premium handpicked videos`;
         }
       }
 
@@ -370,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Filter application
     const applyFilters = () => {
-      filteredVideos = expandedDatabase.filter((video) => {
+      filteredVideos = database.filter((video) => {
         const matchesCategory = activeCategory === 'all' || video.category === activeCategory;
         const searchLower = activeSearchQuery.toLowerCase();
         const matchesSearch = 
@@ -575,6 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
       mainCol.style.transition = 'opacity 0.25s';
 
       setTimeout(() => {
+        detailVideoPlayer.poster = video.thumbnail;
         detailVideoPlayer.src = video.videoUrl;
 
         detailVideoPlayer.play()
@@ -621,6 +548,7 @@ document.addEventListener('DOMContentLoaded', () => {
       watchDownloadBtn.addEventListener('click', () => {
         const textSpan = watchDownloadBtn.querySelector('span');
         const icons = watchDownloadBtn.querySelectorAll('i');
+        const videoUrl = activeVideo?.videoUrl;
 
         // Play the video if paused
         if (detailVideoPlayer.paused || detailVideoPlayer.ended) {
@@ -639,16 +567,16 @@ document.addEventListener('DOMContentLoaded', () => {
           textSpan.textContent = 'Done!';
           icons[1].className = 'fa-solid fa-check';
 
-          // Trigger mock file download
-          const blob = new Blob(['VideoHub mock video file.'], { type: 'video/mp4' });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = `videohub_video_${activeVideo.id}.mp4`;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          URL.revokeObjectURL(url);
+          if (videoUrl) {
+            const a = document.createElement('a');
+            a.href = videoUrl;
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+            a.download = `videohub_video_${activeVideo.id}.mp4`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+          }
 
           // Reset button after 2.5s
           setTimeout(() => {
