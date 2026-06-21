@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VideoHub - Premium Streaming & Video Platform</title>
+  <!-- Google Fonts for Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+  <!-- FontAwesome Icons for Visual Polish -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Sticky Glassmorphic Header -->
+  <header class="main-header" id="mainHeader">
+    <div class="header-container">
+      <div class="header-left">
+        <a href="#" class="logo-link">
+          <div class="logo-icon">
+            <i class="fa-solid fa-play-css"></i>
+            <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 5V19L19 12L8 5Z" fill="url(#logoGradient)" />
+              <defs>
+                <linearGradient id="logoGradient" x1="8" y1="5" x2="19" y2="19" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#2563EB" />
+                  <stop offset="1" stop-color="#3B82F6" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <span class="logo-text">Video<span class="logo-highlight">Hub</span></span>
+        </a>
+      </div>
+
+      <!-- <nav class="header-nav" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#trending" class="nav-link">Trending</a></li>
+          <li><a href="#categories" class="nav-link">Categories</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav> -->
+
+      <div class="header-actions">
+        <div class="search-wrapper">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="searchInput" placeholder="Search videos, categories..." aria-label="Search">
+          <!-- <kbd class="search-kbd">/</kbd> -->
+          <button id="clearSearchBtn" class="clear-search-btn hidden" aria-label="Clear search">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle visual theme">
+          <i class="fa-solid fa-moon moon-icon"></i>
+          <i class="fa-solid fa-sun sun-icon"></i>
+        </button>
+
+        <!-- <div class="user-profile">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80"
+            alt="User Profile" class="profile-img">
+          <div class="profile-status"></div>
+        </div> -->
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section & Filters -->
+  <main class="main-content">
+    <!-- <section class="hero-section">
+      <div class="hero-bg-glow"></div>
+      <div class="hero-container">
+        <h1 class="hero-title">Discover the Next Generation of <span class="gradient-text">Tech Creators</span></h1>
+        <p class="hero-subtitle">Access professional developer guides, animation deep-dives, and design masterpieces curated for SaaS teams.</p>
+        
+        <div class="categories-bar" id="categoriesBar">
+          <button class="filter-btn active" data-category="all">All Videos</button>
+          <button class="filter-btn" data-category="coding">Coding</button>
+          <button class="filter-btn" data-category="design">Design</button>
+          <button class="filter-btn" data-category="space">Space</button>
+          <button class="filter-btn" data-category="travel">Travel</button>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- Video Grid Section -->
+    <section class="gallery-section">
+      <!-- <div class="section-header">
+        <div class="section-title-wrapper">
+          <h2 class="section-title" id="galleryHeading">Curated Playlist</h2>
+          <p class="section-subtitle" id="gallerySubheading">Showing 12 premium handpicked videos</p>
+        </div>
+        <div class="view-options">
+          <span class="results-count" id="resultsCount">12 Videos</span>
+        </div>
+      </div> -->
+
+      <!-- Main Video Cards Grid -->
+      <div class="video-grid" id="videoGrid">
+        <!-- Skeleton Cards (rendered initially, then swapped by script.js) -->
+        <div class="skeleton-card">
+          <div class="skeleton-thumbnail skeleton-animation"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-tag skeleton-animation"></div>
+            <div class="skeleton-title skeleton-animation"></div>
+            <div class="skeleton-text skeleton-animation"></div>
+            <div class="skeleton-meta skeleton-animation"></div>
+          </div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-thumbnail skeleton-animation"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-tag skeleton-animation"></div>
+            <div class="skeleton-title skeleton-animation"></div>
+            <div class="skeleton-text skeleton-animation"></div>
+            <div class="skeleton-meta skeleton-animation"></div>
+          </div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-thumbnail skeleton-animation"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-tag skeleton-animation"></div>
+            <div class="skeleton-title skeleton-animation"></div>
+            <div class="skeleton-text skeleton-animation"></div>
+            <div class="skeleton-meta skeleton-animation"></div>
+          </div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-thumbnail skeleton-animation"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-tag skeleton-animation"></div>
+            <div class="skeleton-title skeleton-animation"></div>
+            <div class="skeleton-text skeleton-animation"></div>
+            <div class="skeleton-meta skeleton-animation"></div>
+          </div>
+        </div>
+        <!-- 8 more skeletons for visual balance -->
+        <div class="skeleton-card">
+          <div class="skeleton-thumbnail skeleton-animation"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-tag skeleton-animation"></div>
+            <div class="skeleton-title skeleton-animation"></div>
+            <div class="skeleton-text skeleton-animation"></div>
+            <div class="skeleton-meta skeleton-animation"></div>
+          </div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-thumbnail skeleton-animation"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-tag skeleton-animation"></div>
+            <div class="skeleton-title skeleton-animation"></div>
+            <div class="skeleton-text skeleton-animation"></div>
+            <div class="skeleton-meta skeleton-animation"></div>
+          </div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-thumbnail skeleton-animation"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-tag skeleton-animation"></div>
+            <div class="skeleton-title skeleton-animation"></div>
+            <div class="skeleton-text skeleton-animation"></div>
+            <div class="skeleton-meta skeleton-animation"></div>
+          </div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-thumbnail skeleton-animation"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-tag skeleton-animation"></div>
+            <div class="skeleton-title skeleton-animation"></div>
+            <div class="skeleton-text skeleton-animation"></div>
+            <div class="skeleton-meta skeleton-animation"></div>
+          </div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-thumbnail skeleton-animation"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-tag skeleton-animation"></div>
+            <div class="skeleton-title skeleton-animation"></div>
+            <div class="skeleton-text skeleton-animation"></div>
+            <div class="skeleton-meta skeleton-animation"></div>
+          </div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-thumbnail skeleton-animation"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-tag skeleton-animation"></div>
+            <div class="skeleton-title skeleton-animation"></div>
+            <div class="skeleton-text skeleton-animation"></div>
+            <div class="skeleton-meta skeleton-animation"></div>
+          </div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-thumbnail skeleton-animation"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-tag skeleton-animation"></div>
+            <div class="skeleton-title skeleton-animation"></div>
+            <div class="skeleton-text skeleton-animation"></div>
+            <div class="skeleton-meta skeleton-animation"></div>
+          </div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-thumbnail skeleton-animation"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-tag skeleton-animation"></div>
+            <div class="skeleton-title skeleton-animation"></div>
+            <div class="skeleton-text skeleton-animation"></div>
+            <div class="skeleton-meta skeleton-animation"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- No Results State -->
+      <div id="noResultsState" class="no-results hidden">
+        <i class="fa-regular fa-face-frown no-results-icon"></i>
+        <h3>No videos found</h3>
+        <p>We couldn't find anything matching your search. Try checking your spelling or adjusting your filters.</p>
+        <button id="resetSearchBtn" class="reset-btn">Clear All Filters</button>
+      </div>
+
+      <!-- Professional Pagination -->
+      <div class="pagination-container">
+        <nav class="pagination" aria-label="Gallery pagination">
+          <button class="pagination-btn prev-btn" id="prevPageBtn" disabled aria-label="Previous Page">
+            <i class="fa-solid fa-chevron-left"></i> Previous
+          </button>
+
+          <div class="page-numbers-wrapper" id="pageNumbers">
+            <!-- Active 1 to 10 numbers generated dynamically/semi-statically -->
+            <button class="page-num active" data-page="1">1</button>
+            <button class="page-num" data-page="2">2</button>
+            <button class="page-num" data-page="3">3</button>
+            <button class="page-num" data-page="4">4</button>
+            <button class="page-num" data-page="5">5</button>
+            <button class="page-num" data-page="6">6</button>
+            <button class="page-num" data-page="7">7</button>
+            <button class="page-num" data-page="8">8</button>
+            <button class="page-num" data-page="9">9</button>
+            <button class="page-num" data-page="10">10</button>
+          </div>
+
+          <button class="pagination-btn next-btn" id="nextPageBtn" aria-label="Next Page">
+            Next <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <!-- Watch Now modal has been replaced by the dedicated video.html details page -->
+
+  <!-- Back to Top Button -->
+  <button id="backToTopBtn" class="back-to-top-btn" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- Footer Section -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="logo-text">Video<span class="logo-highlight">Hub</span></div>
+        <p class="footer-tagline">Premium streaming platform engineered for developers, designers, and creators.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="#" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-links-grid">
+        <div class="footer-column">
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="#">Overview</a></li>
+            <li><a href="#">Trending</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">Premium Plans</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">Creator Center</a></li>
+            <li><a href="#">Community</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press Kit</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 VideoHub Inc. All rights reserved. Built with visual excellence & performance.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Settings</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script Inclusions -->
+  <script src="videos.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
