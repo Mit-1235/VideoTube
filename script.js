@@ -239,9 +239,8 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         const openVideo = () => {
-          if (video.videoUrl) {
-            window.location.href = video.videoUrl;
-          }
+          const slug = window.getVideoSlug(video);
+          window.location.href = `video.html?slug=${slug}`;
         };
 
         card.addEventListener('click', openVideo);

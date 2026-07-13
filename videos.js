@@ -15,7 +15,7 @@ const videoDatabase = [
   {
     id: 2,
     thumbnail: "images/95.jpg",
-    title: "PAKISTAN 10 YEAR BOY YOUNG GIRL FULL VIDEO",
+    title: "PAKISTAN BOY YOUNG GIRL FULL VIDEO",
     videoUrl: "https://1024terabox.com/s/1t5BuyQdgho0JiwhZlPZuGg",
     views: 977389,
     duration: "19:40"
@@ -52,22 +52,22 @@ const videoDatabase = [
     views: 363017,
     duration: "19:40"
   },
-  {
-    id: 7,
-    thumbnail: "images/100.jpg",
-    title: "Shubhashree Sahu Viral MMS",
-    videoUrl: "https://1024terabox.com/s/1XDoGIEq0pGr0jykn3kwGMw",
-    views: 9689694,
-    duration: "19:40"
-  },
-  {
-    id: 8,
-    thumbnail: "images/101.jpg",
-    title: "anjali arora kacha badam",
-    videoUrl: "https://1024terabox.com/s/173uIVrdNHS-xHDLJ2pj2xw",
-    views: 638163,
-    duration: "19:40"
-  },
+  // {
+  //   id: 7,
+  //   thumbnail: "images/100.jpg",
+  //   title: "Shubhashree Sahu Viral MMS",
+  //   videoUrl: "https://1024terabox.com/s/1XDoGIEq0pGr0jykn3kwGMw",
+  //   views: 9689694,
+  //   duration: "19:40"
+  // },
+  // {
+  //   id: 8,
+  //   thumbnail: "images/101.jpg",
+  //   title: "anjali arora kacha badam",
+  //   videoUrl: "https://1024terabox.com/s/173uIVrdNHS-xHDLJ2pj2xw",
+  //   views: 638163,
+  //   duration: "19:40"
+  // },
   {
     id: 9,
     thumbnail: "images/1.jpg",
@@ -162,7 +162,7 @@ const videoDatabase = [
     title: "Addicted To Bush 3 (2024) Adult Movies",
     videoUrl: "https://1024terabox.com/s/1ZgyGswgA-qKigUllG1Ny6g",
     views: 130000,
-    duration: "19:40"
+    duration: "17:30"
   },
   {
     id: 21,
@@ -170,7 +170,7 @@ const videoDatabase = [
     title: "Too Big for Tight Holes (2024) Sex Movies",
     videoUrl: "https://1024terabox.com/s/1rOOqHLM7mpkl4xGZtWgv-w",
     views: 130000,
-    duration: "19:40"
+    duration: "10:20"
   },
   {
     id: 22,
@@ -178,7 +178,7 @@ const videoDatabase = [
     title: "18 YEAR OLD OUTDOOR BLOWJOB HANDJOB XXX",
     videoUrl: "https://1024terabox.com/s/1yF8t51L7j3T48timaeaRTg",
     views: 130000,
-    duration: "19:40"
+    duration: "9:50"
   },
   {
     id: 23,
@@ -194,7 +194,7 @@ const videoDatabase = [
     title: "PAKISTANI WIFE SUCKING FEET AND ANAL",
     videoUrl: "https://1024terabox.com/s/1hjto-o9vvMKD0SqNhbOIzw",
     views: 130000,
-    duration: "19:40"
+    duration: "15:60"
   },
   {
     id: 25,
@@ -202,7 +202,7 @@ const videoDatabase = [
     title: "INDIAN COUPLE NA SHADI KI PHLAI RAT KI VIDEO UPLOAD KAR DI",
     videoUrl: "https://1024terabox.com/s/1tpmwCDKbmALPKAY4fLJwbg",
     views: 130000,
-    duration: "19:40"
+    duration: "12:60"
   },
   {
     id: 26,
@@ -319,7 +319,7 @@ const videoDatabase = [
   {
     id: 40,
     thumbnail: "images/32.jpg",
-    title: "ðŸ”¥ SOFIK SONALI PART 3 LAST WATCH NOW",
+    title: "SOFIK SONALI PART 3 LAST WATCH NOW",
     videoUrl: "https://1024terabox.com/s/1-u2zFc7s6cP9Hcd6PCg1AQ",
     views: 130000,
     duration: "19:40"
@@ -825,3 +825,29 @@ const videoDatabase = [
 
 // Attach database to window for global access
 window.videoDatabase = videoDatabase;
+
+// Slugify helper: converts title to URL-safe slug
+function slugify(text) {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+// Build slug → id lookup map
+window.slugToId = {};
+videoDatabase.forEach(video => {
+  const slug = slugify(video.title);
+  window.slugToId[slug] = video.id;
+});
+
+// Get slug for a video
+window.getVideoSlug = (video) => slugify(video.title);
+
+// Find video by slug
+window.getVideoBySlug = (slug) => {
+  const id = window.slugToId[slug];
+  return videoDatabase.find(v => v.id === id) || null;
+};

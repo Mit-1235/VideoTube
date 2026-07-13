@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Watch Video - VideoHub</title>
+    <meta name="description" content="Watch premium videos on VideoHub. Browse our curated collection of trending videos.">
+    <meta property="og:title" content="Watch Video - VideoHub">
+    <meta property="og:description" content="Watch premium videos on VideoHub.">
+    <meta property="og:type" content="video.other">
+    <meta property="og:url" content="https://teraboxviral.site/video.html">
+    <meta property="og:image" content="https://teraboxviral.site/images/1.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Watch Video - VideoHub">
+    <meta name="twitter:description" content="Watch premium videos on VideoHub.">
+    <link rel="canonical" href="https://teraboxviral.site/video.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- Sticky Glassmorphic Header -->
+    <header class="main-header" id="mainHeader">
+      <div class="header-container">
+        <div class="header-left">
+          <a href="index.html" class="logo-link">
+            <div class="logo-icon">
+              <i class="fa-solid fa-play-css"></i>
+              <svg
+                class="logo-svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M8 5V19L19 12L8 5Z" fill="url(#logoGradient)" />
+                <defs>
+                  <linearGradient
+                    id="logoGradient"
+                    x1="8"
+                    y1="5"
+                    x2="19"
+                    y2="19"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stop-color="#2563EB" />
+                    <stop offset="1" stop-color="#3B82F6" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <span class="logo-text"
+              >Video<span class="logo-highlight">Hub</span></span
+            >
+          </a>
+        </div>
+
+        <div class="header-actions">
+          <a href="index.html" class="back-to-gallery-link">
+            <i class="fa-solid fa-arrow-left"></i> Back to Gallery
+          </a>
+          <button
+            id="themeToggleBtn"
+            class="theme-toggle-btn"
+            aria-label="Toggle visual theme"
+          >
+            <i class="fa-solid fa-moon moon-icon"></i>
+            <i class="fa-solid fa-sun sun-icon"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Dedicated Watch Section (YouTube style layout) -->
+    <main class="main-content">
+      <section id="watchSection" class="watch-section">
+        <div class="watch-container">
+          <!-- Main Left Column -->
+          <div class="watch-main-section">
+            <!-- Video Player Wrapper -->
+            <div class="main-video-player-wrapper">
+              <!-- Custom Video Player Screen -->
+              <video id="mainVideoPlayer" class="video-player" poster="" preload="none" controls>
+                <source src="" type="video/mp4">
+              </video>
+            </div>
+
+            <!-- Video Title -->
+            <div class="video-title-area">
+              <h1 class="detail-video-title" id="videoDetailTitle">Video Title Here</h1>
+            </div>
+
+            <!-- Single Download & Watch Button -->
+            <div class="watch-download-bar" style="margin-bottom: 24px;">
+              <a id="watchDownloadLink" href="#" target="_blank" class="watch-download-btn">
+                <i class="fa-solid fa-download"></i> Download & Watch Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Suggested Sidebar Right Column -->
+          <div class="watch-sidebar-section">
+            <h3 class="sidebar-title">Up Next</h3>
+            <div class="suggested-videos-list suggested-grid" id="suggestedVideosList">
+              <!-- Dynamic suggested list -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" class="back-to-top-btn" aria-label="Back to top">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer Section -->
+    <footer class="main-footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <div class="logo-text">
+            Video<span class="logo-highlight">Hub</span>
+          </div>
+          <p class="footer-tagline">
+            Premium streaming platform engineered for developers, designers, and
+            creators.
+          </p>
+          <div class="social-links">
+            <a href="#" aria-label="Twitter"
+              ><i class="fa-brands fa-twitter"></i
+            ></a>
+            <a href="#" aria-label="GitHub"
+              ><i class="fa-brands fa-github"></i
+            ></a>
+            <a href="#" aria-label="Discord"
+              ><i class="fa-brands fa-discord"></i
+            ></a>
+            <a href="#" aria-label="YouTube"
+              ><i class="fa-brands fa-youtube"></i
+            ></a>
+          </div>
+        </div>
+        <div class="footer-links-grid">
+          <div class="footer-column">
+            <h4>Platform</h4>
+            <ul>
+              <li><a href="#">Overview</a></li>
+              <li><a href="#">Trending</a></li>
+              <li><a href="#">Categories</a></li>
+              <li><a href="#">Premium Plans</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">Creator Center</a></li>
+              <li><a href="#">Community</a></li>
+              <li><a href="#">FAQ</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Press Kit</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2026 VideoHub Inc. All rights reserved. Built with visual
+          excellence & performance.
+        </p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Settings</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Script Inclusions -->
+    <script src="videos.js"></script>
+    <script src="watch.js"></script>
+  </body>
+</html>
