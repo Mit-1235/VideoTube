@@ -220,15 +220,15 @@ document.addEventListener('DOMContentLoaded', () => {
       noResultsState.classList.add('hidden');
 
       videos.forEach((video) => {
-        const card = document.createElement('article');
+        const slug = window.getVideoSlug(video);
+        const card = document.createElement('a');
         card.className = 'video-card';
+        card.href = `video.html?slug=${slug}`;
         card.setAttribute('data-id', video.id);
-        card.setAttribute('role', 'link');
-        card.setAttribute('tabindex', '0');
 
         card.innerHTML = `
           <div class="card-thumbnail-wrapper">
-            <img src="${video.thumbnail}" alt="Video ${video.id}" class="card-thumbnail" loading="lazy">
+            <img src="${video.thumbnail}" alt="${video.title}" class="card-thumbnail" loading="lazy">
             <span class="video-views views-count-el" data-views="${video.views}">
               <i class="fa-solid fa-eye"></i> Calculating views...
             </span>
@@ -237,19 +237,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <h3 class="card-title">${video.title}</h3>
           </div>
         `;
-
-        const openVideo = () => {
-          const slug = window.getVideoSlug(video);
-          window.location.href = `video.html?slug=${slug}`;
-        };
-
-        card.addEventListener('click', openVideo);
-        card.addEventListener('keydown', (event) => {
-          if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            openVideo();
-          }
-        });
 
         videoGrid.appendChild(card);
 
