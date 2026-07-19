@@ -33,7 +33,8 @@ This updates both `sitemap.xml` and `robots.txt` automatically.
 ├── index.html          Homepage with video grid
 ├── video.html          Video player page (served at /video/*)
 ├── contact.html        Contact / video removal page
-├── _redirects          Cloudflare Pages URL rewrites
+├── index.js            Cloudflare Worker (URL rewrites)
+├── wrangler.jsonc      Cloudflare Workers + Assets config
 ├── serve.js            Local dev server (run: node serve.js)
 ├── script.js           Homepage logic (cards, search, pagination)
 ├── watch.js            Video page logic (player, suggestions)
@@ -52,4 +53,4 @@ This updates both `sitemap.xml` and `robots.txt` automatically.
 - Each video page gets unique `<title>` + meta tags via inline script (crawler-friendly)
 - JSON-LD structured data for video rich results
 - Sitemap covers all 99+ video pages with clean URLs
-- `_redirects` rewrites `/video/*` to `video.html` internally on Cloudflare
+- Cloudflare Worker rewrites `/video/*` to `video.html` internally
