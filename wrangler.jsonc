@@ -1,0 +1,11 @@
+{
+  "name": "teraboxviral",
+  "compatibility_date": "2026-07-19",
+  "main": "index.js",
+  "assets": {
+    "directory": "."
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
