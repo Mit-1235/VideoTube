@@ -2,6 +2,16 @@
 
 ## Important Commands
 
+### Local Development
+
+Run the dev server (supports clean `/video/...` URLs):
+
+```
+npm run dev
+```
+
+Then open http://localhost:5500
+
 ### Generate Sitemap & Robots.txt
 
 After adding, removing, or renaming videos in `videos.js`, regenerate the sitemap:
@@ -21,8 +31,11 @@ This updates both `sitemap.xml` and `robots.txt` automatically.
 
 ```
 ├── index.html          Homepage with video grid
-├── video.html          Video player page (per video)
+├── video.html          Video player page (served at /video/*)
 ├── contact.html        Contact / video removal page
+├── _redirects          Cloudflare Pages URL rewrites
+├── serve.js            Local dev server (run: npm run dev)
+├── package.json
 ├── script.js           Homepage logic (cards, search, pagination)
 ├── watch.js            Video page logic (player, suggestions)
 ├── videos.js           Video database
@@ -36,5 +49,8 @@ This updates both `sitemap.xml` and `robots.txt` automatically.
 ## SEO Notes
 
 - Video cards use `<a>` tags with `href` — Googlebot can crawl them
-- Each video page has dynamic OG tags + JSON-LD structured data
-- Sitemap covers all 99+ video pages
+- URLs are clean: `/video/video-title-slug` (no query params)
+- Each video page gets unique `<title>` + meta tags via inline script (crawler-friendly)
+- JSON-LD structured data for video rich results
+- Sitemap covers all 99+ video pages with clean URLs
+- `_redirects` rewrites `/video/*` to `video.html` internally on Cloudflare

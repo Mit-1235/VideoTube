@@ -38,11 +38,11 @@ xml += '    <changefreq>daily</changefreq>\n';
 xml += '    <priority>1.0</priority>\n';
 xml += '  </url>\n';
 
-videos.sort((a, b) => a.id - b.id).forEach(v => {
+  videos.sort((a, b) => a.id - b.id).forEach(v => {
   const s = slugify(v.title);
   xml += '  <url>\n';
-  xml += `    <loc>${domain}/video.html?slug=${s}</loc>\n`;
-  xml += '    <changefreq>weekly</changefreq>\n';
+  xml += `    <loc>${domain}/video/${s}</loc>\n`;
+  xml += '    <changefreq>daily</changefreq>\n';
   xml += '    <priority>0.8</priority>\n';
   xml += '  </url>\n';
 });

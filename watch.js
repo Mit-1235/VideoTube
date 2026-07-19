@@ -56,13 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Extract slug from URL query parameter (e.g., ?slug=pakistani-boy-young-girl-full-video)
-  const urlParams = new URLSearchParams(window.location.search);
-  const slug = urlParams.get('slug');
+  // Extract slug from clean URL (e.g., /video/pakistan-boy-young-girl-full-video)
+  var slug = location.pathname.split('/').pop();
+  if (!slug || slug === 'video.html') slug = '';
   const activeVideo = slug ? (window.getVideoBySlug(slug) || database.find(v => v.id === 1)) : database.find(v => v.id === 1);
 
   if (!activeVideo) {
-    window.location.href = 'index.html';
+    window.location.href = '/';
     return;
   }
 
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
       card.addEventListener('click', () => {
         const s = window.getVideoSlug(video);
-        window.location.href = `video.html?slug=${s}`;
+        window.location.href = `/video/${s}`;
       });
       
       suggestedVideosList.appendChild(card);

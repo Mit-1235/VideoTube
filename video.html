@@ -8,12 +8,13 @@
     <meta property="og:title" content="Terabox Viral MMS Videos">
     <meta property="og:description" content="TeraboxViral - Viral MMS Indian Masti Raja">
     <meta property="og:type" content="video.other">
-    <meta property="og:url" content="https://teraboxviral.site/video.html">
+    <meta property="og:url" content="https://teraboxviral.site/video">
     <meta property="og:image" content="https://teraboxviral.site/images/1.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Terabox Viral MMS Videos">
     <meta name="twitter:description" content="TeraboxViral - Viral MMS Indian Masti Raja">
-    <link rel="canonical" href="https://teraboxviral.site/video.html">
+    <link rel="canonical" href="https://teraboxviral.site/video">
+    <base href="/">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -25,6 +26,28 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link rel="stylesheet" href="style.css" />
+    <script src="videos.js"></script>
+    <script>
+      (function() {
+        var slug = location.pathname.split('/').pop();
+        var video = window.getVideoBySlug ? window.getVideoBySlug(slug) : null;
+        if (video) {
+          document.title = video.title + ' - Terabox Viral';
+          var desc = 'Watch ' + video.title + ' on TeraboxViral. Share and enjoy.';
+          var set = function(sel, attr, val) {
+            var el = document.querySelector(sel);
+            if (el) el.setAttribute(attr, val);
+          };
+          set('meta[name="description"]', 'content', desc);
+          set('meta[property="og:title"]', 'content', document.title);
+          set('meta[property="og:description"]', 'content', desc);
+          set('meta[property="og:url"]', 'content', 'https://teraboxviral.site/video/' + slug);
+          set('meta[name="twitter:title"]', 'content', document.title);
+          set('meta[name="twitter:description"]', 'content', desc);
+          set('link[rel="canonical"]', 'href', 'https://teraboxviral.site/video/' + slug);
+        }
+      })();
+    </script>
   </head>
 
   <body>
@@ -32,7 +55,7 @@
     <header class="main-header" id="mainHeader">
       <div class="header-container">
         <div class="header-left">
-          <a href="index.html" class="logo-link">
+          <a href="/" class="logo-link">
             <div class="logo-icon">
               <i class="fa-solid fa-play-css"></i>
               <svg
@@ -64,7 +87,7 @@
         </div>
 
         <div class="header-actions">
-          <a href="index.html" class="back-to-gallery-link">
+          <a href="/" class="back-to-gallery-link">
             <i class="fa-solid fa-arrow-left"></i> Back to Gallery
           </a>
           <button
@@ -191,7 +214,6 @@
     </footer>
 
     <!-- Script Inclusions -->
-    <script src="videos.js"></script>
     <script src="watch.js"></script>
   </body>
 </html>
