@@ -1,6 +1,6 @@
 /**
  * Local dev server with URL rewriting
- * Mirrors Cloudflare Pages _redirects: /video/* -> /video.html
+ * Mirrors Cloudflare Pages Function: /video/* -> /video.html
  * Usage: node serve.js
  */
 

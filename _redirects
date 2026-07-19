@@ -1,2 +1,0 @@
-# Rewrite clean video URLs internally (no browser redirect)
-/video/* /video.html 200
