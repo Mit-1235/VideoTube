@@ -1,14 +1,17 @@
 export default {
   async fetch(request, env) {
-    const url = new URL(request.url);
-    const path = url.pathname;
+    try {
+      const url = new URL(request.url);
+      const path = url.pathname;
 
-    // Rewrite /video/* and /video to /video.html
-    if (path.startsWith('/video/') || path === '/video') {
-      return env.ASSETS.fetch(new Request(new URL('/video.html', request.url), request));
+      if (path.startsWith('/video/') || path === '/video') {
+        url.pathname = '/video.html';
+        return await env.ASSETS.fetch(new Request(url));
+      }
+
+      return await env.ASSETS.fetch(request);
+    } catch (err) {
+      return new Response(`Error: ${err.message}`, { status: 500 });
     }
-
-    // Serve static assets normally
-    return env.ASSETS.fetch(request);
   }
 };
