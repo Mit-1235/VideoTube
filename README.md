@@ -7,7 +7,7 @@
 Run the dev server (supports clean `/video/...` URLs):
 
 ```
-npm run dev
+node serve.js
 ```
 
 Then open http://localhost:5500
@@ -34,8 +34,7 @@ This updates both `sitemap.xml` and `robots.txt` automatically.
 ├── video.html          Video player page (served at /video/*)
 ├── contact.html        Contact / video removal page
 ├── _redirects          Cloudflare Pages URL rewrites
-├── serve.js            Local dev server (run: npm run dev)
-├── package.json
+├── serve.js            Local dev server (run: node serve.js)
 ├── script.js           Homepage logic (cards, search, pagination)
 ├── watch.js            Video page logic (player, suggestions)
 ├── videos.js           Video database
