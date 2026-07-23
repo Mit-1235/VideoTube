@@ -1,0 +1,8 @@
+{
+  "name": "videohub",
+  "private": true,
+  "scripts": {
+    "dev": "node serve.js",
+    "sitemap": "node generate-sitemap.js"
+  }
+}
