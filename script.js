@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const slug = window.getVideoSlug(video);
         const card = document.createElement('a');
         card.className = 'video-card';
-        card.href = `video.html?slug=${slug}`;
+        card.href = `/video/${slug}/`;
         card.setAttribute('data-id', video.id);
 
         card.innerHTML = `

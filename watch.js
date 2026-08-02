@@ -56,30 +56,66 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Extract slug from URL query parameter (e.g., ?slug=pakistani-boy-young-girl-full-video)
-  const urlParams = new URLSearchParams(window.location.search);
-  const slug = urlParams.get('slug');
-  const activeVideo = slug ? (window.getVideoBySlug(slug) || database.find(v => v.id === 1)) : database.find(v => v.id === 1);
+  // ✅ CHANGE 1: Extract slug from URL Path (/video/slug-name) or query string fallback
+  const getSlugFromPath = () => {
+  const segments = window.location.pathname
+    .split("/")
+    .filter(Boolean);
+
+  if (segments[0] === "video" && segments[1]) {
+    return decodeURIComponent(segments[1]);
+  }
+
+  return null;
+};
+
+  let slug = getSlugFromPath();
+  let activeVideo = slug ? (window.getVideoBySlug ? window.getVideoBySlug(slug) : null) : null;
 
   if (!activeVideo) {
-    window.location.href = 'index.html';
+    window.location.href = '/index.html';
     return;
   }
 
   // Populate Elements
   document.title = `${activeVideo.title} - VideoHub`;
-  document.getElementById('videoDetailTitle').textContent = activeVideo.title;
-  document.getElementById('watchDownloadLink').href = activeVideo.videoUrl;
+  if (document.getElementById('videoDetailTitle')) {
+    document.getElementById('videoDetailTitle').textContent = activeVideo.title;
+  }
+  if (document.getElementById('watchDownloadLink')) {
+    document.getElementById('watchDownloadLink').href = activeVideo.videoUrl;
+  }
 
-  // Dynamic meta tags for SEO
-  document.querySelector('meta[name="description"]').content = `Watch ${activeVideo.title} on VideoHub. ${formatViewsStr(activeVideo.views)} views.`;
-  document.querySelector('meta[property="og:title"]').content = `${activeVideo.title} - VideoHub`;
-  document.querySelector('meta[property="og:description"]').content = `Watch ${activeVideo.title} on VideoHub. ${formatViewsStr(activeVideo.views)} views.`;
-  document.querySelector('meta[property="og:url"]').content = `https://teraboxviral.site/video.html?slug=${slug}`;
-  document.querySelector('meta[property="og:image"]')?.setAttribute('content', activeVideo.thumbnail);
-  document.querySelector('meta[name="twitter:title"]').content = `${activeVideo.title} - VideoHub`;
-  document.querySelector('meta[name="twitter:description"]').content = `Watch ${activeVideo.title} on VideoHub.`;
-  document.querySelector('link[rel="canonical"]').href = `https://teraboxviral.site/video.html?slug=${slug}`;
+  // ✅ CHANGE 2: Clean URLs for Canonical & OpenGraph tags
+  const cleanUrl = `https://teraboxviral.site/video/${slug}/`;
+  const fullThumbnail = activeVideo.thumbnail.startsWith('http') 
+    ? activeVideo.thumbnail 
+    : `https://teraboxviral.site/${activeVideo.thumbnail.replace(/^\//, '')}`;
+
+  if (document.querySelector('meta[name="description"]')) {
+    document.querySelector('meta[name="description"]').content = `Watch ${activeVideo.title} on VideoHub. ${formatViewsStr(activeVideo.views)} views.`;
+  }
+  if (document.querySelector('meta[property="og:title"]')) {
+    document.querySelector('meta[property="og:title"]').content = `${activeVideo.title} - VideoHub`;
+  }
+  if (document.querySelector('meta[property="og:description"]')) {
+    document.querySelector('meta[property="og:description"]').content = `Watch ${activeVideo.title} on VideoHub. ${formatViewsStr(activeVideo.views)} views.`;
+  }
+  if (document.querySelector('meta[property="og:url"]')) {
+    document.querySelector('meta[property="og:url"]').content = cleanUrl;
+  }
+  if (document.querySelector('meta[property="og:image"]')) {
+    document.querySelector('meta[property="og:image"]').setAttribute('content', fullThumbnail);
+  }
+  if (document.querySelector('meta[name="twitter:title"]')) {
+    document.querySelector('meta[name="twitter:title"]').content = `${activeVideo.title} - VideoHub`;
+  }
+  if (document.querySelector('meta[name="twitter:description"]')) {
+    document.querySelector('meta[name="twitter:description"]').content = `Watch ${activeVideo.title} on VideoHub.`;
+  }
+  if (document.querySelector('link[rel="canonical"]')) {
+    document.querySelector('link[rel="canonical"]').href = cleanUrl;
+  }
 
   // Inject JSON-LD structured data for video
   const ld = document.createElement('script');
@@ -89,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     "@type": "VideoObject",
     "name": activeVideo.title,
     "description": `${activeVideo.title} - Watch on VideoHub`,
-    "thumbnailUrl": activeVideo.thumbnail,
+    "thumbnailUrl": fullThumbnail,
     "duration": `PT${activeVideo.duration.replace(':', 'M')}S`,
     "interactionStatistic": {
       "@type": "InteractionCounter",
@@ -101,8 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Video Player - configure source and poster
   const mainVideoPlayer = document.getElementById('mainVideoPlayer');
-
-  // Sample stock video playlist
   const sampleVideos = [
     "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
     "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
@@ -114,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (mainVideoPlayer) {
     mainVideoPlayer.src = getSampleVideoUrl(activeVideo.id);
-    mainVideoPlayer.poster = activeVideo.thumbnail;
+    mainVideoPlayer.poster = fullThumbnail;
   }
 
   // Populate Suggestions Sidebar
@@ -138,9 +172,10 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       `;
       
+      // ✅ CHANGE 3: Redirect to clean URL path when clicked
       card.addEventListener('click', () => {
-        const s = window.getVideoSlug(video);
-        window.location.href = `video.html?slug=${s}`;
+        const s = window.getVideoSlug ? window.getVideoSlug(video) : '';
+        window.location.href = `/video/${s}/`;
       });
       
       suggestedVideosList.appendChild(card);

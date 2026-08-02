@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "node serve.js",
+    "build": "node build-pages.js && node generate-sitemap.js",
     "sitemap": "node generate-sitemap.js"
   }
 }
