@@ -13,45 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const creators = [
       { name: 'Sarah Jenkins', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&h=80&q=80', verified: true, subs: '1.2M' },
-      { name: 'Devon Lane', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&h=80&q=80', verified: true, subs: '890K' },
-      { name: 'Cody Fisher', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&h=80&q=80', verified: false, subs: '320K' },
-      { name: 'Jane Cooper', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=80&h=80&q=80', verified: true, subs: '2.1M' },
-      { name: 'Albert Flores', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=80&h=80&q=80', verified: false, subs: '450K' },
-      { name: 'Esther Howard', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&h=80&q=80', verified: true, subs: '1.1M' }
     ];
     const creator = creators[(video.id - 1) % creators.length];
 
     const descriptions = [
       "Learn advanced JavaScript concepts including event loops, closures, tasks execution processes, and dynamic environment lifecycles.",
-      "Master the next era of React web design. We will build practical exercises including Server Components, form actions, and async hooks.",
-      "Unlock hardware-accelerated layouts, cubic-bezier timing properties, and fluid layout morphing animation secrets.",
-      "A stunning cinematic view of a glowing colorful nebula in deep space with stars, planets, and cosmic dust elements.",
-      "A dramatic drone view of misty volcanic mountains in Iceland with black sand beaches and winding glacier rivers.",
-      "Learn design tokens, spacing scales, typography hierarchies, and dark mode configuration workflows for scalable SaaS layouts.",
-      "An intuitive animated explanation of wave functions, observation theory, particle duality, and quantum computing.",
-      "Immersive exploration of remote huts, pristine alpine glaciers, and wildflower meadows in Swiss valleys.",
-      "Unlock structural safety. Build dynamic interfaces, mapped configurations, and compiler-level type validations.",
-      "Master nested auto-layout setups, flex wraps, absolute bounding constraints, and variable padding designs in Figma.",
-      "Analyzing infrared spectra, oldest active galaxies in the observable universe, and atmospheric exoplanet signatures.",
-      "Explore the peaceful side of Kyoto during its peak autumn colors. Featuring temples, Zen stone gardens, and historic pathways.",
-      "Master writing optimized Dockerfiles, multi-stage builders, container volume isolation, networks, and YAML definitions.",
-      "Understand runes ($state, $derived, $effect), compiler modifications, bindings shifts, and lightweight virtual-dom free architectures.",
-      "Scale CPU-heavy processes inside JavaScript. Use shared array buffers, messaging routines, and core balancing architectures.",
-      "A deep dive into transparency, shadows, backdrop blurring effects, and neon lighting to elevate digital dashboard UI aesthetics.",
-      "Analyzing modern glyph geometries, color psychology selections, SVG adjustments, and multi-platform visual consistency.",
-      "Learn line-height proportions, relative sizing, pairings principles, and readability rules for high-conversion web pages.",
-      "Exploring gravitational lensing observations, dark energy dynamics, cosmic microwave background details, and galaxy mapping.",
-      "An animated breakdown of general relativity equations, time dilation, Hawking radiation physics, and singular collapses.",
-      "Analyzing MOXIE oxygen generation, water ice extraction cycles, radiation shielding configurations, and soil processing setups.",
-      "Traversing the Fitz Roy massifs, camping under hanging lakes, and capturing raw drone visuals of active glaciers.",
-      "A gorgeous street-level cinematic walk through Shinjuku, Golden Gai, and Akihabara under rainy neon reflections.",
-      "A visual guidebook to Positano, Amalfi, and Ravello. Includes transit advice, scenic walking routes, and historic stops.",
-      "Unlock memory safety. Learn borrow checker behaviors, ownership scopes, lifetimes specifications, and thread concurrency.",
-      "Build robust web architectures. Learn cached API layers, dynamic routing strategies, and streaming suspensions.",
-      "Learn monochromatic styles, HSL palette generations, contrast accessibilities, and CSS custom color models.",
-      "Learn glass shaders configurations, caustics simulations, transmission indexes, and Cycles engine rendering layouts.",
-      "Master stacked captures, spectral noise reduction protocols, and colorful hydrogen-alpha mappings.",
-      "A gorgeous exploration of fishing cabins under the Northern Lights and snowy peaks in arctic Norway."
     ];
     const description = descriptions[(video.id - 1) % descriptions.length] || "Access professional guidelines, animation deep-dives, and design masterpieces curated for SaaS teams.";
 
