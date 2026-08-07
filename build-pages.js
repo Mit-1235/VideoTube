@@ -66,6 +66,7 @@ try {
         thumbnailUrl: imageUrl,
         contentUrl: video.videoUrl,
         url: pageUrl,
+        uploadDate: new Date().toISOString(),
         duration: `PT${video.duration.replace(":", "M")}S`,
         interactionStatistic: {
           "@type": "InteractionCounter",

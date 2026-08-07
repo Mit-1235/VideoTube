@@ -129,7 +129,7 @@ if (activeVideo.embedUrl) {
         sampleVideos[(id - 1) % sampleVideos.length];
 
     if (mainVideoPlayer) {
-        mainVideoPlayer.src = getSampleVideoUrl(activeVideo.id);
+        // mainVideoPlayer.src = getSampleVideoUrl(activeVideo.id);
         mainVideoPlayer.poster = fullThumbnail;
     }
 }
