@@ -78,79 +78,61 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Populate Elements
-  document.title = `${activeVideo.title} - VideoHub`;
-  if (document.getElementById('videoDetailTitle')) {
-    document.getElementById('videoDetailTitle').textContent = activeVideo.title;
-  }
-  if (document.getElementById('watchDownloadLink')) {
-    document.getElementById('watchDownloadLink').href = activeVideo.videoUrl;
-  }
 
-  // ✅ CHANGE 2: Clean URLs for Canonical & OpenGraph tags
-  const cleanUrl = `https://teraboxviral.site/video/${slug}/`;
-  const fullThumbnail = activeVideo.thumbnail.startsWith('http') 
-    ? activeVideo.thumbnail 
-    : `https://teraboxviral.site/${activeVideo.thumbnail.replace(/^\//, '')}`;
+if (document.getElementById("videoDetailTitle")) {
+    document.getElementById("videoDetailTitle").textContent = activeVideo.title;
+}
 
-  if (document.querySelector('meta[name="description"]')) {
-    document.querySelector('meta[name="description"]').content = `Watch ${activeVideo.title} on VideoHub. ${formatViewsStr(activeVideo.views)} views.`;
-  }
-  if (document.querySelector('meta[property="og:title"]')) {
-    document.querySelector('meta[property="og:title"]').content = `${activeVideo.title} - VideoHub`;
-  }
-  if (document.querySelector('meta[property="og:description"]')) {
-    document.querySelector('meta[property="og:description"]').content = `Watch ${activeVideo.title} on VideoHub. ${formatViewsStr(activeVideo.views)} views.`;
-  }
-  if (document.querySelector('meta[property="og:url"]')) {
-    document.querySelector('meta[property="og:url"]').content = cleanUrl;
-  }
-  if (document.querySelector('meta[property="og:image"]')) {
-    document.querySelector('meta[property="og:image"]').setAttribute('content', fullThumbnail);
-  }
-  if (document.querySelector('meta[name="twitter:title"]')) {
-    document.querySelector('meta[name="twitter:title"]').content = `${activeVideo.title} - VideoHub`;
-  }
-  if (document.querySelector('meta[name="twitter:description"]')) {
-    document.querySelector('meta[name="twitter:description"]').content = `Watch ${activeVideo.title} on VideoHub.`;
-  }
-  if (document.querySelector('link[rel="canonical"]')) {
-    document.querySelector('link[rel="canonical"]').href = cleanUrl;
-  }
+if (document.getElementById("watchDownloadLink")) {
+    document.getElementById("watchDownloadLink").href = activeVideo.videoUrl;
+}
 
-  // Inject JSON-LD structured data for video
-  const ld = document.createElement('script');
-  ld.type = 'application/ld+json';
-  ld.textContent = JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "VideoObject",
-    "name": activeVideo.title,
-    "description": `${activeVideo.title} - Watch on VideoHub`,
-    "thumbnailUrl": fullThumbnail,
-    "duration": `PT${activeVideo.duration.replace(':', 'M')}S`,
-    "interactionStatistic": {
-      "@type": "InteractionCounter",
-      "interactionType": "WatchAction",
-      "userInteractionCount": activeVideo.views
+const fullThumbnail = activeVideo.thumbnail.startsWith("http")
+    ? activeVideo.thumbnail
+    : `https://teraboxviral.site${activeVideo.thumbnail}`;
+
+// =====================================
+// Video Player
+// =====================================
+
+const playerWrapper = document.querySelector(".main-video-player-wrapper");
+const mainVideoPlayer = document.getElementById("mainVideoPlayer");
+
+if (activeVideo.embedUrl) {
+
+    // Remove the HTML5 player completely
+    if (mainVideoPlayer) {
+        mainVideoPlayer.remove();
     }
-  });
-  document.head.appendChild(ld);
 
-  // Video Player - configure source and poster
-  const mainVideoPlayer = document.getElementById('mainVideoPlayer');
-  const sampleVideos = [
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"
-  ];
-  const getSampleVideoUrl = (id) => sampleVideos[(id - 1) % sampleVideos.length];
+    playerWrapper.innerHTML = `
+        <iframe
+            class="video-player"
+            src="${activeVideo.embedUrl}"
+            frameborder="0"
+            scrolling="no"
+            allow="autoplay">
+        </iframe>
+    `;
 
-  if (mainVideoPlayer) {
-    mainVideoPlayer.src = getSampleVideoUrl(activeVideo.id);
-    mainVideoPlayer.poster = fullThumbnail;
-  }
+} else {
 
+    const sampleVideos = [
+        "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+        "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+        "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+        "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+        "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"
+    ];
+
+    const getSampleVideoUrl = (id) =>
+        sampleVideos[(id - 1) % sampleVideos.length];
+
+    if (mainVideoPlayer) {
+        mainVideoPlayer.src = getSampleVideoUrl(activeVideo.id);
+        mainVideoPlayer.poster = fullThumbnail;
+    }
+}
   // Populate Suggestions Sidebar
   const suggestedVideosList = document.getElementById('suggestedVideosList');
   if (suggestedVideosList) {
